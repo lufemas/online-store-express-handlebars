@@ -1,0 +1,28 @@
+body{
+  background-color: bisque;
+}
+
+.ct-product{
+}
+
+.ct-product img{
+  object-fit: contain;
+
+  height: 10rem;
+  width: auto;
+}
+
+.ct-product p{
+  white-space: pre-line;
+}
+
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  margin: 0;
+  padding: 0;
+}

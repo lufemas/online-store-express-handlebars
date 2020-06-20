@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/jr-style/jr-main.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Amazon - {{title}}</title>
+</head>
+<body>
+  
+  <header>
+    <div class="logo"></div>
+    <ul class="jr flex-row around">
+      <li><a href="/">Home</a></li>
+      <li><a href="/products">Products</a></li>
+      <li><button id="login-link">Login</button></li>
+      <li><button id="registration-link">Registration</button></li>
+    </ul>
+  </header>
+
+  <main>
+    {{{body}}}
+  </main>
+
+<footer>
+
+  Footer Here
+
+</footer>
+
+{{> login}}
+{{> registration}}
+
+<script type="module" src="/js/index.js"></script>
+</body>
+</html>

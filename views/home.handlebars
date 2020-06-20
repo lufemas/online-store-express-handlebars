@@ -1,0 +1,31 @@
+<h1>Welcome to Amazon.IA</h1>
+
+<article class="promo-banner">
+  Banner Here
+</article>
+
+{{!-- With image and links --}}
+<article class="product-category">
+  <h3>Categories</h3>
+   <ul class="jr flex-row">
+      {{#each categories}}
+        <li class="jr col-3 card p-2">
+          <a href="/products/{{this}}" class="jr flex-col between ct-product center">
+            <h4>{{capitalizeFirst this}}</h4>
+            <img class="jr" src="/assets/img/categories/{{this}}.jpg" alt="">
+          </a>
+        </li>
+      {{/each}}
+  </ul>
+</article>
+
+{{!-- With image and links --}}
+{{!-- https://via.placeholder.com/250 --}}
+<article class="best-selling">
+ <h3>Best Selling</h3>
+   <ul class="jr flex-row">
+      {{#each bestSellers}}
+        {{>product name = this.name imgSrc = this.imgSrc description = this.description price = this.price}}
+      {{/each}}
+  </ul>
+</article>
