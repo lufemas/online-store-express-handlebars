@@ -4,7 +4,7 @@ const fakeDB  = require('./model/Products');
 const { capitalizeFirst, formatCurrency } = require('./jr-node-utils');
 
 //set PORT here
-const PORT = 3000;
+const PORT =  process.env.PORT || 3000;
 
 
 console.log(fakeDB.getCategories())
