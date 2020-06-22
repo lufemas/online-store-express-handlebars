@@ -20,12 +20,6 @@ $('#registration-link').onclick = (e)=>{
   toogleDisplay($('#registration-modal'))
 }
 
-const $closeModalBtnCollection = document.getElementsByClassName('close-modal-btn')
-for(const $btn of $closeModalBtnCollection){
-  $btn.onclick = ()=>{
-    toogleDisplay( $( $btn.value ) )
-  }
-}
 
 
 // window.onbeforeunload =  (e) => {
