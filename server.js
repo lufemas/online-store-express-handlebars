@@ -1,7 +1,7 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const fakeDB  = require('./model/Products');
-const { capitalizeFirst } = require('./jr-node-utils');
+const { capitalizeFirst, formatCurrency } = require('./jr-node-utils');
 
 //set PORT here
 const PORT = 3000;
@@ -19,7 +19,8 @@ app.use(express.static('public'))
 const hbs = exphbs.create({
 
   helpers:{
-    capitalizeFirst: (word)=> capitalizeFirst(word)
+    capitalizeFirst: (word)  => capitalizeFirst(word),
+    toCurrency     : (value) => formatCurrency(value)
   }
 })
 
@@ -52,7 +53,8 @@ app.get('/products', (req,res) =>{
 
   const expressions = {
     title: 'Products',
-    products : fakeDB.getAllProducts().reverse()
+    products : fakeDB.getAllProducts().reverse(),
+    categories: fakeDB.getCategories()
   }
 
   res.render('products',expressions)
@@ -63,7 +65,8 @@ app.get('/products/:category', (req,res) =>{
 
   const expressions = {
     title: 'Products',
-    products : fakeDB.getProductsFromCategory(req.params.category)
+    products : fakeDB.getProductsFromCategory(req.params.category),
+    categories: fakeDB.getCategories()
   }
 
 

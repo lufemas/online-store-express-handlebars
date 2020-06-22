@@ -5,7 +5,8 @@ console.info('index.js')
 
 
 window.onload = ()=>{
-
+  console.log('Are you sure you want to leave?');
+  $('#main-footer').style.bottom = '0px'
 }
 
 
@@ -25,3 +26,9 @@ for(const $btn of $closeModalBtnCollection){
     toogleDisplay( $( $btn.value ) )
   }
 }
+
+
+// window.onbeforeunload =  (e) => {
+//   e.preventDefault()
+//   console.log('Are you sure you want to leave?');
+// }

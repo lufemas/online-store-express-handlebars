@@ -1,5 +1,16 @@
-<ul class="jr flex-row flex-wrap">
-  {{#each products}}
-  {{>product name = this.name imgSrc = this.imgSrc description = this.description price = this.price}}
-  {{/each}}
-</ul>
+<article class="jr flex-row h100">
+
+      {{>categories-side-menu categories=categories}}
+ 
+
+  <div class="jr flex-col w100 center">
+
+    <ul class="jr flex-row flex-wrap w100 p-1">
+      {{#each products}}
+      {{>product detail=true name = this.name imgSrc = this.imgSrc description = this.description price = this.price}}
+      {{/each}}
+    </ul>
+
+  </div>  
+
+</article>

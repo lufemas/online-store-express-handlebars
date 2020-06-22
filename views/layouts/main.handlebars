@@ -9,23 +9,61 @@
 </head>
 <body>
   
-  <header>
-    <div class="logo"></div>
-    <ul class="jr flex-row around">
-      <li><a href="/">Home</a></li>
-      <li><a href="/products">Products</a></li>
-      <li><button id="login-link">Login</button></li>
-      <li><button id="registration-link">Registration</button></li>
+  <header class="main-header jr flex-row between ">
+    
+    <div class="logo jr m-only m-05 p-05">
+      <img class="amazon-logo jr m-auto" src="/assets/img/amazon/amazon-logo-for-dark-bg.svg" alt="">
+    </div>
+
+    {{!-- <div class="jr col-m-05 h100 "></div> --}}
+
+    <ul class="jr col-m-1 col-5 flex-row between ">
+      <li class="jr h100 flex-col center"><a class="link-darkg-bg jr m-05" href="/">Home</a></li>
+      <li class="jr h100 flex-col center"><a class="link-darkg-bg jr m-05" href="/products">Products</a></li>
     </ul>
+
+    <div class="jr col m-only h100 flex-grow-1 "></div>
+
+    <ul class="jr col-m-1 col-5 flex-row flex-end m-05 ">
+      <li class="jr h100 flex-col center"><button class="jr button p-05 m-05" id="login-link">Login</button></li>
+      <li class="jr h100 flex-col center"><button class="jr button-primary p-05 m-05" id="registration-link">SignUp</button></li>
+    </ul>
+
   </header>
 
-  <main>
+  <main class="main jr">
     {{{body}}}
   </main>
 
-<footer>
+<div class="footer-bar">
+  
+</div>
+<footer id="main-footer" class="main-footer jr flex-m-row around p-1">
 
-  Footer Here
+<div>
+  <h4 class="jr mp-0">Quick Links</h4>
+  <ul class="jr mt-1">
+    <li><a class="link-darkg-bg" href="/">Home</a></li>
+    <li><a class="link-darkg-bg" href="/products">Products</a></li>
+  </ul>
+</div>
+
+<div>
+  <h4 class="jr mp-0">Get to Know Us</h4>
+  <ul class="jr mt-1">
+    <li><a class="link-darkg-bg" href="#">About Us</a></li>
+    <li><a class="link-darkg-bg" href="#">Careers</a></li>
+    <li><a class="link-darkg-bg" href="#">Press Release</a></li>
+  </ul>
+</div>
+
+<div>
+  <h4 class="jr mp-0">Connect To Us</h4>
+  <ul class="jr mt-1">
+    <li><a class="link-darkg-bg" href="#">Facebook</a></li>
+    <li><a class="link-darkg-bg" href="#">Instagram</a></li>
+  </ul>
+</div>
 
 </footer>
 

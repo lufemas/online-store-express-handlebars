@@ -1,5 +1,69 @@
+*{
+  --amazon-yellow: #F29201;
+  --jr-btn-primary-color : #3d2502;
+  --jr-btn-primary-bg-color: var(--amazon-yellow);
+  --jr-btn-border-primary-color: #a17533;
+  --jr-btn-hover-primary-color: #000;
+  --jr-btn-hover-primary-bg-color: #d48610;
+  --jr-btn-hover-border-primary-color: #694b1d;
+}
+
+
 body{
-  background-color: bisque;
+  background-color: rgb(247, 247, 247);
+}
+
+a{
+  text-decoration: inherit;
+}
+
+.main-header{
+  background-color: #333;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1.05rem;
+}
+
+.link-darkg-bg{
+  color: white;
+}
+
+
+.link-darkg-bg:hover{
+  color: white;
+  text-decoration: underline;
+}
+
+.main-header .amazon-logo{
+  width: 8rem;
+}
+
+
+
+.home-body{
+  width: 80%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+.display-title{
+  background-color: var(--amazon-yellow);
+  padding: 1rem .5rem;
+  background: rgb(242,146,1);
+  background: linear-gradient(90deg, rgba(242,146,1,1) 0%, rgba(242,146,1,0.4906163148853291) 33%, rgba(242,146,1,0) 89%);
+}
+
+.amazon-logo{
+  width: 10rem;
+  display: block;
+}
+
+.categories-side-menu{
+  background-color: #333; 
+}
+
+.categories-side-menu{
+  color: white;
 }
 
 .ct-product{
@@ -7,7 +71,6 @@ body{
 
 .ct-product img{
   object-fit: contain;
-
   height: 10rem;
   width: auto;
 }
@@ -25,4 +88,15 @@ ul{
 li{
   margin: 0;
   padding: 0;
+}
+
+.main-footer{
+  width: 100%;
+  color: white;
+  background-color: #222;
+}
+
+.footer-bar{
+  background-color: #333;
+  height: 1.5rem;
 }

@@ -1,7 +1,32 @@
-<li class="jr flex-col between col-3 ct-product">
-  <h4>{{name}}</h4>
+
+{{#if detail}}
+<li class="jr flex-col between col p-1 ct-product card flex-m-grow-1">
+  <h4 class="jr mp-0">{{name}}</h4>
+  <div class="jr flex-m-row">
+
+    <img class="jr col-m-1" src={{imgSrc}} alt="">
+    <p class="jr col-m-9 p-2 m-0">{{description}}</p>
+  
+  </div> 
+
+  <div class="jr flex-row between">
+    <span><sup>CDN$ </sup>{{toCurrency price}}</span>
+    <button class="jr button-primary m-05">Buy</button>
+  </div>
+{{/if}}
+
+{{#if titleAndPrice}}
+<li class="jr flex-m-col between col-m-4 p-1 ct-product card flex-m-grow-1">
+  <h4 class="jr mp-0">{{name}}</h4>
   <img class="jr" src={{imgSrc}} alt="">
-  <p>{{description}}</p>
   <span>{{price}}</span>
-  <button>Buy</button>
+{{/if}}
+
+{{#if justPicture}}
+<li class="jr flex-m-col between col-m-4 p-1 ct-product card flex-m-grow-1">
+  <img class="jr" src={{imgSrc}} alt="">
+{{/if}}
+
+  
+
 </li>
