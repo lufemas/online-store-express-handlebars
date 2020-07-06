@@ -9,7 +9,9 @@ router.get('/', (req,res) =>{
     const expressions = {
       title: 'Home',
       categories: fakeDB.getCategories(),
-      bestSellers: fakeDB.getBestSellingProducts()
+      bestSellers: fakeDB.getBestSellingProducts(),
+      loginEmail: req.query.loginEmail || " ",
+      loginModal: req.query.loginModal || false
     }
   
     res.render('home', expressions)

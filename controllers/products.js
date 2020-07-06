@@ -9,7 +9,9 @@ router.get('/', (req,res) =>{
     const expressions = {
       title: 'Products',
       products : fakeDB.getAllProducts().reverse(),
-      categories: fakeDB.getCategories()
+      categories: fakeDB.getCategories(),
+      loginEmail: req.query.loginEmail || " ",
+      loginModal: req.query.loginModal || false
     }
   
     res.render('products',expressions)
@@ -21,7 +23,9 @@ router.get('/', (req,res) =>{
     const expressions = {
       title: 'Products',
       products : fakeDB.getProductsFromCategory(req.params.category),
-      categories: fakeDB.getCategories()
+      categories: fakeDB.getCategories(),
+      loginEmail: req.query.loginEmail || " ",
+      loginModal: req.query.loginModal || false
     }
   
   

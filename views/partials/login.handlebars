@@ -1,4 +1,4 @@
-<div class="jr modal-bg" id="login-modal">
+<div class="jr modal-bg" id="login-modal" style= {{#if loginModal}}"display: block;"{{else}}"display: none;"{{/if}}>
   <div class="jr card center-modal p-0">
     {{!-- <button value="#login-modal" class="close-modal-btn">X</button> --}}
     <img class="amazon-logo jr m-auto mt-2" src="/assets/img/amazon/amazon-logo.svg" alt="">
@@ -9,7 +9,7 @@
         <input type="hidden" name="currentRoute" value='/' id='login-current-route'>
 
         <label class='jr' for="login-email">Email</label>
-        <input class='jr' type="text" name="email" id="login-email">
+        <input class='jr' type="text" name="email" id="login-email" value={{#if loginEmail}}{{loginEmail}}{{else}}""{{/if}}>
 
         <label class='jr' for="login-password">Password</label>
         <input class='jr' type="password" name="password" id="login-password" placeholder="At least 6 characters">

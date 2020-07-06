@@ -113,7 +113,6 @@ products.addProduct({
   isBestSelling: false
 })
 
-module.exports = products
 
 
 // BOOKS
@@ -260,12 +259,13 @@ products.addProduct({
   isBestSelling: true
 })
 
+module.exports = products
 
 // products.addProduct({
-//   name: '',
-//   category: '',
-//   price: 0,
-//   description: ``,
-//   imgSrc: '/assets/category/img',
-//   isBestSelling: false
-// })
+  //   name: '',
+  //   category: '',
+  //   price: 0,
+  //   description: ``,
+  //   imgSrc: '/assets/category/img',
+  //   isBestSelling: false
+  // })
