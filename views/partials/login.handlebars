@@ -9,9 +9,12 @@
         <input type="hidden" name="currentRoute" value='/' id='login-current-route'>
 
         <label class='jr' for="login-email">Email</label>
+        {{#if loginTry}} {{#ifeq loginEmail " "}} <span style="color: red">Enter your email</span>  {{/ifeq}} {{/if}}
         <input class='jr' type="text" name="email" id="login-email" value={{#if loginEmail}}{{loginEmail}}{{else}}""{{/if}}>
+        {{!-- {{#ifeq loginEmail " "}} <span style="color: red">Enter you email</span>  {{/ifeq}} --}}
 
         <label class='jr' for="login-password">Password</label>
+        {{#if loginTry}} {{#ifeq loginPassword " "}} <span style="color: red">Enter a password</span>  {{/ifeq}} {{/if}}
         <input class='jr' type="password" name="password" id="login-password" placeholder="At least 6 characters">
         <small class='jr'>&#128712 Passwords must consist of at least 6 characters.</small>
       </div>

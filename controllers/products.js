@@ -11,7 +11,9 @@ router.get('/', (req,res) =>{
       products : fakeDB.getAllProducts().reverse(),
       categories: fakeDB.getCategories(),
       loginEmail: req.query.loginEmail || " ",
-      loginModal: req.query.loginModal || false
+      loginPassword: req.query.loginPassword || " ",
+      loginTry: req.query.loginTry || false,
+      loginModal: req.query.loginModal || false,
     }
   
     res.render('products',expressions)
@@ -25,7 +27,9 @@ router.get('/', (req,res) =>{
       products : fakeDB.getProductsFromCategory(req.params.category),
       categories: fakeDB.getCategories(),
       loginEmail: req.query.loginEmail || " ",
-      loginModal: req.query.loginModal || false
+      loginPassword: req.query.loginPassword || " ",
+      loginTry: req.query.loginTry || false,
+      loginModal: req.query.loginModal || false,
     }
   
   

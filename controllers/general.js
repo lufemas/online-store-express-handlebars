@@ -11,7 +11,9 @@ router.get('/', (req,res) =>{
       categories: fakeDB.getCategories(),
       bestSellers: fakeDB.getBestSellingProducts(),
       loginEmail: req.query.loginEmail || " ",
-      loginModal: req.query.loginModal || false
+      loginPassword: req.query.loginPassword || " ",
+      loginTry: req.query.loginTry || false,
+      loginModal: req.query.loginModal || false,
     }
   
     res.render('home', expressions)

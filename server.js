@@ -22,6 +22,7 @@ const hbs = exphbs.create({
   helpers:{
     capitalizeFirst: (word)  => capitalizeFirst(word),
     toCurrency     : (value) => formatCurrency(value),
+    ifeq           : (v1, v2, options)=> v1 == v2 ? options.fn(this) : options.inverse(this)
   }
 })
 

@@ -9,6 +9,10 @@ $('#registration-modal').onclick = (e)=>{
   toogleDisplay($('#registration-modal'))
 }
 
+$('#registration-form').addEventListener('submit', (e)=>{
+  $('#registration-current-route').value = location.pathname
+})
+
 
 
 

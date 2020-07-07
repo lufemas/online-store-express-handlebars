@@ -11,8 +11,6 @@ $('#login-modal').onclick = (e)=>{
 
 $('#login-form').addEventListener('submit', (e)=>{
   $('#login-current-route').value = location.pathname
-  // e.preventDefault();
-  console.log('submit')
 })
 
 
