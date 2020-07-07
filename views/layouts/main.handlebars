@@ -67,8 +67,22 @@
 
 </footer>
 
-{{> login loginEmail=loginEmail loginPassword=loginPassword loginTry=loginTry loginModal=loginModal}}
-{{> registration}}
+{{> login 
+    loginEmail=loginEmail 
+    loginPassword=loginPassword 
+    loginTry=loginTry 
+    loginModal=loginModal
+}}
+
+{{> registration 
+    regName=regName
+    regEmail=regEmail
+    regPassword=regPassword
+    regConfirmPassword=regConfirmPassword
+    regModal=regModal
+    regTry=regTry
+    regWarnings=regWarnings  
+}}
 
 <script type="module" src="/js/index.js"></script>
 </body>

@@ -40,18 +40,20 @@ router.post('/login', (req,res) =>{
     const warnings = {}
     console.log(req.body)
 
-    if( !isObjEmpty(warnings)) console.log('warnings')
+   
+    String(name) == ''                          ? console.log("name is valid.")    : warnings.name             = `Enter a valid name`
+    String(email).match(/^.+@\w+[.].+$/)        ? console.log("email is valid.")   : warnings.email             = `Enter a valid email`
+    String(password).match(/^\w{6,12}$/)        ? console.log("password is valid") : warnings.password          = `Enter a valid password`
+    String(password) == String(confirmPassword) ? console.log("passwords matches") : warnings.passwordConfirm   = `Password doesn't match`
 
-    if (String(email).match(/^\w+@\w+[.]\w+/)){
-      console.log("email matches!")
-    }
 
-    if (String(password).match(/^\w{6,12}$/)){
-      console.log("password matches!")
-    }
-
-    if(email == "" || password == "" ){
+    if(isObjEmpty(warnings)){
+      // LOGGED ROUTE
+      res.redirect(currentRoute)
+    }else{
+   
       console.log('WRONG')
+      console.log(warnings)
 
       res.redirect(url.format({
         pathname:currentRoute,
@@ -62,13 +64,12 @@ router.post('/login', (req,res) =>{
           "regConfirmPassword": String(confirmPassword),
           "regModal": true,
           "regTry": true,
-          "warning" : warnings
+          "warningEmail" : warnings.email || null,
+          "warningPassword" : warnings.password || null,
+          "warningPasswordConfirm" : warnings.passwordConfirm || null,
+          "warningName" : warnings.name || null,
         }
       }));
-
-    }else{
-      // LOGGED ROUTE
-      res.redirect(currentRoute)
     }
   
   });

@@ -14,6 +14,14 @@ router.get('/', (req,res) =>{
       loginPassword: req.query.loginPassword || " ",
       loginTry: req.query.loginTry || false,
       loginModal: req.query.loginModal || false,
+
+      regName             : req.query.regName || "", 
+      regEmail            : req.query.regEmail || "", 
+      regPassword         : req.query.regPassword || "", 
+      regConfirmPassword  : req.query.regConfirmPasswor || "",
+      regModal            : req.query.regModal || false, 
+      regTry              : req.query.regTry || false, 
+      regWarnings         : req.query.warnings || {} , 
     }
   
     res.render('products',expressions)
@@ -30,6 +38,14 @@ router.get('/', (req,res) =>{
       loginPassword: req.query.loginPassword || " ",
       loginTry: req.query.loginTry || false,
       loginModal: req.query.loginModal || false,
+
+      regName             : req.query.regName || "", 
+      regEmail            : req.query.regEmail || "", 
+      regPassword         : req.query.regPassword || "", 
+      regConfirmPassword  : req.query.regConfirmPasswor || "",
+      regModal            : req.query.regModal || false, 
+      regTry              : req.query.regTry || false, 
+      regWarnings         : req.query.warnings || {} , 
     }
   
   

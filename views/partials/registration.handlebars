@@ -1,4 +1,4 @@
-<div class="jr modal-bg" id="registration-modal">
+<div class="jr modal-bg" id="registration-modal" style= {{#if regModal}}"display: block;"{{else}}"display: none;"{{/if}}>
   <div class="jr card center-modal p-0">
     {{!-- <button value="#login-modal" class="close-modal-btn">X</button> --}}
     <img class="amazon-logo jr m-auto mt-2" src="/assets/img/amazon/amazon-logo.svg" alt="">
@@ -8,12 +8,16 @@
 
         <input type="hidden" name="currentRoute" value='/' id='registration-current-route'>
 
+        {{#if regWarningName}} <span style="color: red">{{regWarningName}}</span> {{/if}}
         <label class='jr' for="reg-name">Your Name</label>
-        <input class='jr' type="text" name="name" id="reg-name">
+        <input class='jr' type="text" name="name" id="reg-name" value={{#if regName}}{{regName}}{{else}}""{{/if}}>
 
+        {{#if regWarningEmail}} <span style="color: red">{{regWarningEmail}}</span> {{/if}}
         <label class='jr' for="reg-email">Email</label>
-        <input class='jr' type="text" name="email" id="reg-email">
+        <input class='jr' type="text" name="email" id="reg-email" value={{#if regEmail}}{{regEmail}}{{else}}""{{/if}}>
 
+        {{#if regWarningPassword}} <span style="color: red">{{regWarningPassword}}</span> {{/if}}
+        {{#if regWarningPasswordConfirm}} <span style="color: red">{{regWarningPasswordConfirm}}</span> {{/if}}
         <label class='jr' for="reg-password">Password</label>
         <input class='jr' type="password" name="password" id="reg-password" placeholder="At least 6 characters">
         <small class='jr'>&#128712 Passwords must consist of at least 6 characters.</small>
