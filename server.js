@@ -1,13 +1,14 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
-const fakeDB  = require('./model/Products');
+const bodyParser = require('body-parser')
+
+
 const { capitalizeFirst, formatCurrency } = require('./jr-node-utils');
 
 //set PORT here
 const PORT =  process.env.PORT || 3000;
 
 
-console.log(fakeDB.getCategories())
 
 // Init express
 const app = express();
@@ -20,7 +21,7 @@ const hbs = exphbs.create({
 
   helpers:{
     capitalizeFirst: (word)  => capitalizeFirst(word),
-    toCurrency     : (value) => formatCurrency(value)
+    toCurrency     : (value) => formatCurrency(value),
   }
 })
 
@@ -28,51 +29,25 @@ const hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+// load controllers
+const generalController = require('./controllers/general')
+const productsController = require('./controllers/products')
+const userController = require('./controllers/user')
+
+// maping controllers
+app.use('/',generalController)
+app.use('/products/',productsController)
+app.use('/user',userController)
+
 
 // app.engine.registerHelper("noop", function(options) {
 //   return options.fn(this);
 // });
 
-
-
-//HOME route
-app.get('/', (req,res) =>{
-
-  const expressions = {
-    title: 'Home',
-    categories: fakeDB.getCategories(),
-    bestSellers: fakeDB.getBestSellingProducts()
-  }
-
-  res.render('home', expressions)
-
-});
-
-// Products Page
-app.get('/products', (req,res) =>{
-
-  const expressions = {
-    title: 'Products',
-    products : fakeDB.getAllProducts().reverse(),
-    categories: fakeDB.getCategories()
-  }
-
-  res.render('products',expressions)
-
-});
-
-app.get('/products/:category', (req,res) =>{
-
-  const expressions = {
-    title: 'Products',
-    products : fakeDB.getProductsFromCategory(req.params.category),
-    categories: fakeDB.getCategories()
-  }
-
-
-  res.render('products',expressions)
-
-});
 
 // Pop-ups
 

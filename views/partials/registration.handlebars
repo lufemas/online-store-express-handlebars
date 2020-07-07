@@ -2,22 +2,22 @@
   <div class="jr card center-modal p-0">
     {{!-- <button value="#login-modal" class="close-modal-btn">X</button> --}}
     <img class="amazon-logo jr m-auto mt-2" src="/assets/img/amazon/amazon-logo.svg" alt="">
-    <form class="jr flex-m-col center">           
+    <form class="jr flex-m-col center" method="POST" accept="/user/register">           
       <div class="jr flex-m-col card p-1 m-2">
         <h3>Create Account</h3>
 
         <label class='jr' for="reg-name">Your Name</label>
-        <input class='jr' type="text" name="reg-email" id="reg-name">
+        <input class='jr' type="text" name="email" id="reg-name">
 
         <label class='jr' for="reg-email">Email</label>
-        <input class='jr' type="text" name="reg-email" id="reg-email">
+        <input class='jr' type="text" name="email" id="reg-email">
 
         <label class='jr' for="reg-password">Password</label>
-        <input class='jr' type="password" name="reg-password" id="reg-password" placeholder="At least 6 characters">
+        <input class='jr' type="password" name="password" id="reg-password" placeholder="At least 6 characters">
         <small class='jr'>&#128712 Passwords must consist of at least 6 characters.</small>
 
         <label class='jr' for="reg-confirm-password">Confirm Password</label>
-        <input class='jr' type="password" name="reg-confirm-password" id="reg-confirm-password">
+        <input class='jr' type="password" name="confirmPassword" id="reg-confirm-password">
         
       </div>
         <input class="jr button-primary m-2 mt-0" type="submit" value="Create Amazon Account">

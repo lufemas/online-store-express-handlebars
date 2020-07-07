@@ -9,9 +9,10 @@ $('#login-modal').onclick = (e)=>{
   toogleDisplay($('#login-modal'))
 }
 
+$('#login-form').addEventListener('submit', (e)=>{
+  $('#login-current-route').value = location.pathname
+  // e.preventDefault();
+  console.log('submit')
+})
 
-
-function closeButton(el){
-  toogleDisplay(el)
-}
 

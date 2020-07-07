@@ -2,15 +2,17 @@
   <div class="jr card center-modal p-0">
     {{!-- <button value="#login-modal" class="close-modal-btn">X</button> --}}
     <img class="amazon-logo jr m-auto mt-2" src="/assets/img/amazon/amazon-logo.svg" alt="">
-    <form class="jr flex-m-col center">           
+    <form id="login-form" class="jr flex-m-col center" method="POST" action="/user/login">           
       <div class="jr flex-m-col card p-1 m-2">
         <h3>Sign-In</h3>
 
+        <input type="hidden" name="currentRoute" value='/' id='login-current-route'>
+
         <label class='jr' for="login-email">Email</label>
-        <input class='jr' type="text" name="login-email" id="login-email">
+        <input class='jr' type="text" name="email" id="login-email">
 
         <label class='jr' for="login-password">Password</label>
-        <input class='jr' type="password" name="login-password" id="login-password" placeholder="At least 6 characters">
+        <input class='jr' type="password" name="password" id="login-password" placeholder="At least 6 characters">
         <small class='jr'>&#128712 Passwords must consist of at least 6 characters.</small>
       </div>
         <input class="jr button m-2 mt-0" type="submit" value="Sign-In">
