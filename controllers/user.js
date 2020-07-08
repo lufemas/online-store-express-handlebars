@@ -28,6 +28,11 @@ router.post('/login', (req,res) =>{
       }));
 
     }else{
+
+      const user = require('../model/user')
+
+      user.logIn(String(email))
+
       // LOGGED ROUTE
       res.redirect(currentRoute)
     }
@@ -41,15 +46,52 @@ router.post('/login', (req,res) =>{
     console.log(req.body)
 
    
-    String(name) == ''                          ? console.log("name is valid.")    : warnings.name             = `Enter a valid name`
+    String(name).length > 0                     ? console.log("name is valid.")    : warnings.name              = `Enter a valid name`
     String(email).match(/^.+@\w+[.].+$/)        ? console.log("email is valid.")   : warnings.email             = `Enter a valid email`
     String(password).match(/^\w{6,12}$/)        ? console.log("password is valid") : warnings.password          = `Enter a valid password`
     String(password) == String(confirmPassword) ? console.log("passwords matches") : warnings.passwordConfirm   = `Password doesn't match`
 
 
     if(isObjEmpty(warnings)){
-      // LOGGED ROUTE
-      res.redirect(currentRoute)
+      console.log(process.env.SENDGRID_API_KEY)
+      // using Twilio SendGrid's v3 Node.js Library
+      // https://github.com/sendgrid/sendgrid-nodejs
+      const sgMail = require('@sendgrid/mail');
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
+        to: String(email),
+        from: "maschietto.jr@gmail.com",
+        subject: 'Your FakeAmazon account was created',
+        html: `<h2>Welcome to FakeAmazon ${name}</h2>
+        <p> Your account was created successfully</p>
+        
+        <a href="#">Go to FakeAmazon</a>`,
+      };
+      sgMail.send(msg)
+      .then(()=>{
+        
+        const user = require('../model/user')
+
+        user.logIn(String(name))
+
+        // LOGGED ROUTE
+        res.redirect(currentRoute)
+      })
+      .catch((err)=> {
+        console.error(err)
+        if (err.response) {
+          // Extract error msg
+          const {message, code, response} = err;
+       
+          // Extract response msg
+          const {headers, body} = response;
+       
+          console.error(body);
+        }
+       
+      })     
+      
+
     }else{
    
       console.log('WRONG')

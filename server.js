@@ -3,11 +3,12 @@ const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser')
 
 
+require('dotenv').config({path:"./config/keys.env"});
+
 const { capitalizeFirst, formatCurrency } = require('./jr-node-utils');
 
 //set PORT here
-const PORT =  process.env.PORT || 3000;
-
+const PORT =  process.env.PORT;
 
 
 // Init express

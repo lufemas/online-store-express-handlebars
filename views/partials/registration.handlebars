@@ -19,11 +19,11 @@
         {{#if regWarningPassword}} <span style="color: red">{{regWarningPassword}}</span> {{/if}}
         {{#if regWarningPasswordConfirm}} <span style="color: red">{{regWarningPasswordConfirm}}</span> {{/if}}
         <label class='jr' for="reg-password">Password</label>
-        <input class='jr' type="password" name="password" id="reg-password" placeholder="At least 6 characters">
+        <input class='jr' type="password" name="password" id="reg-password" placeholder="At least 6 characters" value={{#if regPassword}}{{regPassword}}{{else}}""{{/if}}>
         <small class='jr'>&#128712 Passwords must consist of at least 6 characters.</small>
 
         <label class='jr' for="reg-confirm-password">Confirm Password</label>
-        <input class='jr' type="password" name="confirmPassword" id="reg-confirm-password">
+        <input class='jr' type="password" name="confirmPassword" id="reg-confirm-password" value={{#if regConfirmPassword}}{{regConfirmPassword}}{{else}}""{{/if}}>
         
       </div>
         <input class="jr button-primary m-2 mt-0" type="submit" value="Create Amazon Account">

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fakeDB  = require('../model/Products');
 
+const user = require('../model/user')
 
 //HOME route
 router.get('/', (req,res) =>{
@@ -11,10 +12,17 @@ router.get('/', (req,res) =>{
     console.log("req.query")
     console.log(req.query)
 
+console.log(user)
+
     const expressions = {
       title: 'Home',
       categories    : fakeDB.getCategories(),
       bestSellers   : fakeDB.getBestSellingProducts(),
+
+      userLogged    : user.logged,
+      userName      : user.name,
+      
+
       loginEmail    : req.query.loginEmail || " ",
       loginPassword : req.query.loginPassword || " ",
       loginTry      : req.query.loginTry || false,
@@ -23,7 +31,7 @@ router.get('/', (req,res) =>{
       regName                    : req.query.regName || "", 
       regEmail                   : req.query.regEmail || "", 
       regPassword                : req.query.regPassword || "", 
-      regConfirmPassword         : req.query.regConfirmPasswor || "",
+      regConfirmPassword         : req.query.regConfirmPassword || "",
       regModal                   : req.query.regModal || false, 
       regTry                     : req.query.regTry || false, 
       regWarningName             : req.query.warningName || null , 
