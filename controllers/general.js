@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const fakeDB  = require('../model/Products');
+const fakeDB  = require('../models/Products');
 
-const user = require('../model/user')
+const user = require('../models/user')
 
 //HOME route
 router.get('/', (req,res) =>{

@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose');
 
 
 require('dotenv').config({path:"./config/keys.env"});
@@ -33,6 +34,14 @@ app.set('view engine', 'handlebars');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
+// Connect to Mongo Atlas Cluster
+
+mongoose.connect(process.env.MONGODB_STRING, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=> console.log('DataBase connected.'))
+.catch( err => console.log('Error connecting to DataBase: ' + err))
+
 
 
 // load controllers
