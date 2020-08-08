@@ -10,6 +10,8 @@
 
         <label class='jr' for="login-email">Email</label>
         {{#if loginTry}} {{#ifeq loginEmail " "}} <span style="color: red">Enter your email</span>  {{/ifeq}} {{/if}}
+        {{#if error}}  <span style="color: red">{{error}}</span> {{/if}}
+        {{!-- {{#if loginTry}} {{#ifeq loginEmail " "}} <span style="color: red">Enter your email</span>  {{/ifeq}} {{/if}} --}}
         <input class='jr' type="text" name="email" id="login-email" value={{#if loginEmail}}{{loginEmail}}{{else}}""{{/if}}>
         {{!-- {{#ifeq loginEmail " "}} <span style="color: red">Enter you email</span>  {{/ifeq}} --}}
 

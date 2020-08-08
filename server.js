@@ -2,7 +2,7 @@ const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-
+const session = require('express-session')
 
 require('dotenv').config({path:"./config/keys.env"});
 
@@ -34,6 +34,39 @@ app.set('view engine', 'handlebars');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Custom middlewares for PUT and DELETE from forms
+app.use((req,res,next)=>{
+
+  if(req.query.method=="PUT")
+  {
+      req.method="PUT"
+  }
+
+  else if(req.query.method=="DELETE")
+  {
+      req.method="DELETE"
+  }
+
+  next();
+})
+
+// app.use(fileUpload());
+
+// Setting up session
+app.use(session({
+  secret: `${process.env.SECRET_SESSION}`,
+  resave: false,
+  saveUninitialized: true
+}))
+
+app.use((req,res,next)=>{
+
+
+  res.locals.user= req.session.userInfo;
+
+  next();
+})
 
 
 // Connect to Mongo Atlas Cluster

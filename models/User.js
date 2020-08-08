@@ -34,6 +34,12 @@ const bcrypt = require("bcryptjs");
         required:true
     },
 
+    credential:
+    {
+        type:String,
+        default: 'user'
+    },
+
     dateCreated:
     {
         type:Date,

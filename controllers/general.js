@@ -27,6 +27,7 @@ console.log(user)
       loginPassword : req.query.loginPassword || " ",
       loginTry      : req.query.loginTry || false,
       loginModal    : req.query.loginModal || false,
+      error         : req.query.error || '',
 
       regName                    : req.query.regName || "", 
       regEmail                   : req.query.regEmail || "", 

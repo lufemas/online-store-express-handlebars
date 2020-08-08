@@ -26,8 +26,10 @@
     <div class="jr col m-only h100 flex-grow-1 "></div>
 
     <ul class="jr col-m-1 col-5 flex-row flex-end m-05 ">
-      {{#if userLogged}}
-      <p style="color:white;">Welcome, <strong>{{userName}} </strong></p>
+      {{#if user}}
+      <li class="jr h100 flex-col center"><a href="/user/auth" class="jr p-05 m-05 pl-1 pr-1 button-primary">⚙ <strong>{{user.name}}</strong></a></li>
+      <li class="jr h100 flex-col center"><a href="/user/logout" class="jr button p-05 m-05" id="logout-link">Logout</a></li>
+
       {{else}}
       <li class="jr h100 flex-col center"><button class="jr button p-05 m-05" id="login-link">Login</button></li>
       <li class="jr h100 flex-col center"><button class="jr button-primary p-05 m-05" id="registration-link">SignUp</button></li>
