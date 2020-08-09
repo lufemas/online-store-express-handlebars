@@ -8,7 +8,6 @@ const {adminOnly} = require('../middleware/authorization')
 const fs = require('fs');
 
 
-const user = require('../models/user');
 const session = require('express-session');
 
 
