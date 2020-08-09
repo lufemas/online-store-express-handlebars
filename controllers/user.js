@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const fakeDB = require("../models/Products");
+const fakeDB = require("../models/Product");
 const url = require("url");
 const path = require("path");
 const bcrypt = require("bcryptjs");
 
 const isAuthenticated = require('../middleware/authentication')
-const dashBoardLoader = require('../middleware/authorization')
+const {dashBoardLoader, adminOnly} = require('../middleware/authorization')
 
 const { isObjEmpty } = require("../jr-node-utils");
 const userModel = require("../models/user");

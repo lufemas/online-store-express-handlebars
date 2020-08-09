@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const fakeDB  = require('../models/Products');
+const fakeDB  = require('../models/Product').fakeDB;
 
 const user = require('../models/user')
 

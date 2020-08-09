@@ -12,12 +12,12 @@
         {{#if loginTry}} {{#ifeq loginEmail " "}} <span style="color: red">Enter your email</span>  {{/ifeq}} {{/if}}
         {{#if error}}  <span style="color: red">{{error}}</span> {{/if}}
         {{!-- {{#if loginTry}} {{#ifeq loginEmail " "}} <span style="color: red">Enter your email</span>  {{/ifeq}} {{/if}} --}}
-        <input class='jr' type="text" name="email" id="login-email" value={{#if loginEmail}}{{loginEmail}}{{else}}""{{/if}}>
+        <input class='jr' type="text" name="email" id="login-email" value={{#if loginEmail}}"maschietto.jr@gmail.com"{{loginEmail}}{{else}}"maschietto.jr@gmail.com"{{/if}}>
         {{!-- {{#ifeq loginEmail " "}} <span style="color: red">Enter you email</span>  {{/ifeq}} --}}
 
         <label class='jr' for="login-password">Password</label>
         {{#if loginTry}} {{#ifeq loginPassword " "}} <span style="color: red">Enter a password</span>  {{/ifeq}} {{/if}}
-        <input class='jr' type="password" name="password" id="login-password" placeholder="At least 6 characters">
+        <input class='jr' type="password" name="password" id="login-password" placeholder="At least 6 characters" value="123456">
         <small class='jr'>&#128712 Passwords must consist of at least 6 characters.</small>
       </div>
         <input class="jr button m-2 mt-0" type="submit" value="Sign-In">

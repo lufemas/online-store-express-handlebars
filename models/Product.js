@@ -1,3 +1,71 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+//This indicates the shape of the documents that will be entering the database
+  const productSchema = new Schema({
+   
+    name:
+    {
+        type:String,
+        required:true
+    },
+
+    category:
+    {
+        type:String,
+        required:true
+    },
+    price:
+    {
+        type:Number,
+        required:true
+    },
+
+    description:
+    {
+        type:String,
+    },
+
+    imgSrc:
+    {
+        type:String,
+    },
+
+    isBestSelling:
+    {
+        type:Boolean,
+    },
+
+    isFeatured:
+    {
+        type:Boolean,
+    },
+
+    quantity:
+    {
+        type:Number,
+    },
+
+
+    dateCreated:
+    {
+        type:Date,
+        default:Date.now()
+    }
+  });
+
+  /*
+    For every Schema you create(Create a schema per collection), you must also create a model object. 
+    The model will allow you to perform CRUD operations on a given collection!!! 
+  */
+
+ const productModel = mongoose.model('Product', productSchema);
+
+//  module.exports = productsModel;
+
+//  ^ New DB, real one
+//  ///////////////////////////////////////////////////////////////////////////////
+
 function Products(){
   this.DB = []
   this.categories = []
@@ -259,7 +327,46 @@ products.addProduct({
   isBestSelling: true
 })
 
-module.exports = products
+module.exports = {
+  fakeDB: products,
+  productModel,
+}
+
+// this.addProduct = ({name, category, price, description, imgSrc, isBestSelling})=>{
+//   this.DB.push({
+//     name,
+//     category,
+//     price,
+//     description,
+//     imgSrc,
+//     isBestSelling
+//   })
+
+//   this.updateCategories(category)
+// }
+//   this.getRandomProduct = ()=>  this.DB[Math.floor(Math.random() * this.DB.length)]
+//   this.getAllProducts = ()=> this.DB
+
+//   this.getFeaturedProducts = (n) => {
+    
+//     const featuredProducts = []
+//     for(let i = 0; i < n; i++){
+//       featuredProducts.push(this.getRandomProduct())
+//     }
+
+//     return featuredProducts
+
+//   }
+
+//   this.getProductsFromCategory = (category) => this.DB.filter((item)=> item.category == category)
+//   this.getBestSellingProducts = (category) => this.DB.filter((item)=> item.isBestSelling )
+
+//   this.updateCategories = (category)=>{
+//     if(this.categories.indexOf(category) < 0 ) this.categories.push(category)
+//   }
+
+//   this.getCategories = ()=> this.categories
+
 
 // products.addProduct({
   //   name: '',

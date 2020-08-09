@@ -100,3 +100,7 @@ li{
   background-color: #333;
   height: 1.5rem;
 }
+
+.hide{
+  display: none !important;
+}

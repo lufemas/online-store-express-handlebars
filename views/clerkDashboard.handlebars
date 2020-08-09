@@ -1,20 +1,112 @@
-<article class="jr card">
+<article class="jr w95 m-auto">
 
   <h2>{{user.name}}, you are at the Clerk Panel</h2>
 
   <p><b>Email: </b> {{user.email}}</p>
 
-  <article class="jr card">
+  <article class="jr card w95 mh-auto m-2 p-2">
 
     <nav class="jr p-2">
       <ul class="jr flex-row list-raw w70 m-auto evenly">
-        <li><a class="jr button" href="/add-product">Add Product</a></li>
-        <li><a class="jr button" href="/edit-product">Edit Product</a></li>
-        <li><a class="jr button" href="/list-products">List All Products</a></li>
+        <li><button class="jr button" id="add-btn">Add Product</button></li>
+        {{!-- <li><button class="jr button" id="edit-btn">Edit Product</button></li> --}}
+        <li><button class="jr button" id="list-btn">List All Products</button></li>
       </ul>
     </nav>
 
+
+    {{!-- 
+    name: String,
+    category: String,
+    price: Number,
+    description: String,
+    imgSrc: String,
+    isBestSelling: Boolean,
+    isFeatured: Boolean,
+    dateCreated: Date 
+    --}}
+
+  <div class="hide" id="edit-product-section">
+    <h2><span id="action-header">Add</span> Product</h2>
+    <form id="edit-product-form" class="jr flex-col card p-15 w30" method="POST" action="/products/add" enctype="multipart/form-data"> 
+
+      <label for="product_id">Product ID</label>
+      <input type="text" name="product_id" id="product_id" readonly>
+
+      <label for="product_name">Name</label>
+      <input type="text" name="product_name" id="product_name">
+
+      <label for="product_category">Category</label>
+      <input type="text" name="product_category" id="product_category">
+
+      <label for="product_price">Price</label>
+      <input type="number" step="0.01" name="product_price" id="product_price" value="0.00">
+
+      <label for="product_description">Description</label>
+      <textarea name="product_description" id="product_description" cols="60" rows="4" ></textarea>
+
+      <label for="product_isBestSelling"> <input type="checkbox" name="product_isBestSelling" id="product_isBestSelling"> Best Selling</label>
+      <label for="product_isFeatured"> <input type="checkbox" name="product_isFeatured" id="product_isFeatured"> Featured</label>
+
+      <label for="product_imgFile">Picture</label>
+      <input type="file" name="product_imgFile" id="product_imgFile">
+
+      <div class="jr card w80 p-1">
+        <img class="jr w100" id="product-img" src="" alt="">
+      </div>
+
+      <label for="product_quantity">Quantity</label>
+      <input type="number" name="product_quantity" id="product_quantity" value="0">
+
+      <input type="submit" value="Save Product">
+
+    </form>
+  </div>
+
+  <article id="list-product-section" class="hide">
+
+  <h2>Products List</h2>
+  <label for="category_select">Filter By Category :
+  <select class="jr m-15" name="categories_select" id="categories-select" >
+      <option value='All'>All</option>
+    {{#each categoriesList}}
+      <option value={{this.name}}>{{this.name}}</option>
+    {{/each}}
+  </select>
+</label>
+
+    <ul>
+      {{#each productsList}}
+        <li class="jr flex-row between col mr-1 mt-05 p-0 ct-product flex-m-grow-1 product-list-item">
+
+          <div class="jr flex-col w100 card p-05">
+            <h4 class="jr mp-0">{{this.name}}</h4>
+            <h5 class="jr mp-0"><b>category: </b><span>{{this.category}}</span></h5>
+            <div class="jr flex-m-row mt-05">
+
+              <img class="jr col-m-1" style="height: 6rem;" src="/uploads/products/{{imgSrc}}" alt="">
+              <p class="jr col-m-9 p-2 m-0" style="font-size: .7rem;">{{this.description}}</p>
+            
+            <div class="jr flex-col between">
+              <span><b>Price: </b><sup>CDN$ </sup>{{toCurrency this.price}}</span>
+              <span><b>Inventory: </b>{{this.quantity}}</span>
+            </div>  
+            </div> 
+
+          </div>
+          <div class="jr flex-col evenly ml-05">
+              <button class="jr button-primary m-0 " value={{this._id}} onclick="handleEditBtn({{toJSON this}})">Edit</button>
+              <a class="jr button m-0 text-v-center pt-05 pb-05" style="font-size: .8em;" href="/products/delete/{{this._id}}?method=DELETE">Delete</a>
+          </div>
+
+        </li>
+
+      {{/each}}
+    </ul>
+
   </article>
 
+  </article>
 
+<script src="/js/clerkDashboard.js"></script>
 </article>

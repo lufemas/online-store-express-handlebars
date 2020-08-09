@@ -3,6 +3,7 @@ const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const session = require('express-session')
+const fileUpload = require('express-fileupload')
 
 require('dotenv').config({path:"./config/keys.env"});
 
@@ -24,7 +25,9 @@ const hbs = exphbs.create({
   helpers:{
     capitalizeFirst: (word)  => capitalizeFirst(word),
     toCurrency     : (value) => formatCurrency(value),
-    ifeq           : (v1, v2, options)=> v1 == v2 ? options.fn(this) : options.inverse(this)
+    ifeq           : (v1, v2, options)=> v1 == v2 ? options.fn(this) : options.inverse(this),
+    toJSON         : (obj)  => JSON.stringify(obj), 
+    getFirstName   : (str)  => str.split(' ')[0], 
   }
 })
 
@@ -38,9 +41,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Custom middlewares for PUT and DELETE from forms
 app.use((req,res,next)=>{
 
+  console.log('custom put delete middleware')
+
   if(req.query.method=="PUT")
   {
-      req.method="PUT"
+  console.log('custom put delete middleware PUT')
+  req.method="PUT"
   }
 
   else if(req.query.method=="DELETE")
@@ -51,7 +57,9 @@ app.use((req,res,next)=>{
   next();
 })
 
-// app.use(fileUpload());
+app.use(fileUpload({
+  debug: true
+}));
 
 // Setting up session
 app.use(session({
