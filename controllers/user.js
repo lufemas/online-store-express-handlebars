@@ -9,7 +9,7 @@ const isAuthenticated = require('../middleware/authentication')
 const {dashBoardLoader, adminOnly} = require('../middleware/authorization')
 
 const { isObjEmpty } = require("../jr-node-utils");
-const userModel = require("../models/user");
+const userModel = require("../models/User");
 const session = require("express-session");
 const productModel = require("../models/Product");
 const { Mongoose } = require("mongoose");
