@@ -2,79 +2,138 @@ const express = require('express');
 const path = require('path')
 const router = express.Router();
 const fakeDB  = require('../models/Product').fakeDB;
-const {productModel} = require('../models/Product');
+const productModel = require('../models/Product');
 const categoryModel = require('../models/Category');
 const {adminOnly} = require('../middleware/authorization')
 const fs = require('fs');
 
 
-const user = require('../models/user')
+const user = require('../models/user');
+const session = require('express-session');
 
 
 // Products Page
 router.get('/', (req,res) =>{
 
-    const expressions = {
-      title: 'Products',
-      products : fakeDB.getAllProducts().reverse(),
-      categories: fakeDB.getCategories(),
+    productModel.find()
+    .then( products => {
+
+      categoryModel.find()
+      .then( categories => {
+
+        const expressions = {
+          title: 'Products',
+          products: products.map( product => product.toObject()),
+          categories: categories.map( category => category.toObject()),
+          
+          // userLogged    : user.logged,
+          // userName      : user.name,
+    
+          // user: req.session.userInfo,
+    
+          loginEmail: req.query.loginEmail || " ",
+          loginPassword: req.query.loginPassword || " ",
+          loginTry: req.query.loginTry || false,
+          loginModal: req.query.loginModal || false,
+    
+          regName                    : req.query.regName || "", 
+          regEmail                   : req.query.regEmail || "", 
+          regPassword                : req.query.regPassword || "", 
+          regConfirmPassword         : req.query.regConfirmPassword || "",
+          regModal                   : req.query.regModal || false, 
+          regTry                     : req.query.regTry || false, 
+          regWarningName             : req.query.warningName || null , 
+          regWarningEmail            : req.query.warningEmail || null , 
+          regWarningPassword         : req.query.warningPassword || null , 
+          regWarningPasswordConfirm  : req.query.warningPasswordConfirm || null , 
+        }
       
-      userLogged    : user.logged,
-      userName      : user.name,
+        res.render('products',expressions)
 
-      loginEmail: req.query.loginEmail || " ",
-      loginPassword: req.query.loginPassword || " ",
-      loginTry: req.query.loginTry || false,
-      loginModal: req.query.loginModal || false,
+      })
 
-      regName                    : req.query.regName || "", 
-      regEmail                   : req.query.regEmail || "", 
-      regPassword                : req.query.regPassword || "", 
-      regConfirmPassword         : req.query.regConfirmPassword || "",
-      regModal                   : req.query.regModal || false, 
-      regTry                     : req.query.regTry || false, 
-      regWarningName             : req.query.warningName || null , 
-      regWarningEmail            : req.query.warningEmail || null , 
-      regWarningPassword         : req.query.warningPassword || null , 
-      regWarningPasswordConfirm  : req.query.warningPasswordConfirm || null , 
-    }
-  
-    res.render('products',expressions)
+
+
+
+    })
+
   
   });
   
   router.get('/list/:category', (req,res) =>{
-  
-    const expressions = {
-      title: 'Products',
-      products : fakeDB.getProductsFromCategory(req.params.category),
-      categories: fakeDB.getCategories(),
 
-      userLogged    : user.logged,
-      userName      : user.name,
+
+    productModel.find({category: req.params.category})
+    .then( products => {
+
+      categoryModel.find()
+      .then( categories => {
+
+
+        const expressions = {
+          title: 'Products',
+          products: products.map( product => product.toObject()),
+          categories: categories.map( category => category.toObject()),
+    
+        
+          
+    
+          loginEmail: req.query.loginEmail || " ",
+          loginPassword: req.query.loginPassword || " ",
+          loginTry: req.query.loginTry || false,
+          loginModal: req.query.loginModal || false,
+    
+          // user: req.session.userInfo,
+    
+    
+          regName                    : req.query.regName || "", 
+          regEmail                   : req.query.regEmail || "", 
+          regPassword                : req.query.regPassword || "", 
+          regConfirmPassword         : req.query.regConfirmPassword || "",
+          regModal                   : req.query.regModal || false, 
+          regTry                     : req.query.regTry || false, 
+          regWarningName             : req.query.warningName || null , 
+          regWarningEmail            : req.query.warningEmail || null , 
+          regWarningPassword         : req.query.warningPassword || null , 
+          regWarningPasswordConfirm  : req.query.warningPasswordConfirm || null , 
+        }
       
+      
+        res.render('products',expressions)
 
-      loginEmail: req.query.loginEmail || " ",
-      loginPassword: req.query.loginPassword || " ",
-      loginTry: req.query.loginTry || false,
-      loginModal: req.query.loginModal || false,
 
-      regName                    : req.query.regName || "", 
-      regEmail                   : req.query.regEmail || "", 
-      regPassword                : req.query.regPassword || "", 
-      regConfirmPassword         : req.query.regConfirmPassword || "",
-      regModal                   : req.query.regModal || false, 
-      regTry                     : req.query.regTry || false, 
-      regWarningName             : req.query.warningName || null , 
-      regWarningEmail            : req.query.warningEmail || null , 
-      regWarningPassword         : req.query.warningPassword || null , 
-      regWarningPasswordConfirm  : req.query.warningPasswordConfirm || null , 
-    }
+      })
+
+    })
+
   
-  
-    res.render('products',expressions)
+ 
   
   });
+
+  router.get('/migrate', (req, res) =>{
+
+    fakeDB.getCategories().forEach( category =>{
+
+      new categoryModel({name: category}).save()
+      .catch(err => console.log(err))
+    })
+
+  
+
+    // productModel.find()
+    // .then(productsList => {
+
+    //   console.log(productsList)
+    //   productsList.forEach( product =>{
+    //     console.log(product._id)
+    //     productModel.updateOne({ _id: product._id},  { quantity : 20 })
+    //     .catch(err => console.log('error updating qnt : ' + err))
+    //   })
+
+    // })
+
+  })
 
   router.post("/add", adminOnly, (req, res) => {
     // ///////////////////

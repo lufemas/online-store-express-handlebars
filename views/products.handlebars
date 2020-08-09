@@ -7,7 +7,7 @@
 
     <ul class="jr flex-row flex-wrap w100">
       {{#each products}}
-      {{>product detail=true name = this.name imgSrc = this.imgSrc description = this.description price = this.price}}
+      {{>product detail=true name = this.name imgSrc = this.imgSrc description = this.description price = this.price id=this._id }}
       {{/each}}
     </ul>
 

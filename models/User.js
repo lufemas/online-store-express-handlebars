@@ -40,6 +40,12 @@ const bcrypt = require("bcryptjs");
         default: 'user'
     },
 
+    cart:
+    {
+        type:Array,
+        default: []
+    },
+
     dateCreated:
     {
         type:Date,

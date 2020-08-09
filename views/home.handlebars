@@ -9,12 +9,15 @@
     <h3 class="display-title jr mt-2">Categories</h3>
     <ul class="jr flex-m-row">
         {{#each categories}}
+        {{#name}}
           <li class="jr col-m-3 card p-1">
             <a href="/products/list/{{this}}" class="jr flex-m-col between ct-product center">
               <h4>{{capitalizeFirst this}}</h4>
               <img class="jr img" src="/assets/img/categories/{{this}}.jpg" alt="">
             </a>
           </li>
+        {{/name}}
+
         {{/each}}
     </ul>
   </article>
@@ -25,7 +28,7 @@
   <h3 class="display-title jr m-0 mt-2">Best Selling</h3>
     <ul class="jr flex-m-row flex-m-wrap">
         {{#each bestSellers}}
-          {{>product justPicture=true imgSrc = this.imgSrc }}
+          {{>product justPicture=true imgSrc = this.imgSrc id=this._id }}
         {{/each}}
     </ul>
   </article>

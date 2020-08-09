@@ -10,6 +10,10 @@ const {dashBoardLoader, adminOnly} = require('../middleware/authorization')
 
 const { isObjEmpty } = require("../jr-node-utils");
 const userModel = require("../models/user");
+const session = require("express-session");
+const productModel = require("../models/Product");
+const { Mongoose } = require("mongoose");
+const isLoggedIn = require("../middleware/authentication");
 
 //LOGIN route
 router.post("/login", (req, res) => {
@@ -72,6 +76,8 @@ router.post("/login", (req, res) => {
             .then((isMatched) => {
               if (isMatched) {
                 req.session.userInfo = user;
+
+                // if(req.session.userInfo.cart.length <= 0 ) req.session.userInfo.cart
 
                 res.redirect("/user/auth");
               } else {
@@ -165,7 +171,7 @@ router.post("/register", (req, res) => {
               // LOGGED ROUTE
               // res.redirect(currentRoute)
               req.session.userInfo = user
-              res.redirect(`profile`);
+              res.redirect(`auth`);
             })
             .catch((err) => {
               console.error(err);
@@ -220,11 +226,93 @@ router.get("/auth",isAuthenticated,dashBoardLoader);
 //   });
 // });
 
-router.get("/logout",(req,res)=>{
+router.get("/logout", isLoggedIn,(req,res)=>{
 
   req.session.destroy();
   res.redirect("/")
   
+})
+
+router.get('/cart', isLoggedIn, (req,res)=>{
+
+  if(req.session.userInfo.cart.length <= 0){
+    res.render('cart')
+
+
+  }else{
+
+    const cart = req.session.userInfo.cart
+  
+    // const cartMongIds = cart.map( item=> new Mongoose().Types.ObjectId (item.id))
+  
+    cart.forEach( (item, ind) =>{
+      productModel.findOne({_id: item.id})
+      .then(product =>{
+  
+        item.name = product.name
+        item.price = product.price
+        item.category = product.category
+        item.description = product.description
+        item.imgSrc = product.imgSrc
+        item.total = product.price * item.quantity
+  
+        console.log(req.session.userInfo)
+  
+        if(ind >= cart.length - 1){
+            res.render('cart')
+  
+        }
+  
+      })
+    })
+
+  }
+
+})
+
+router.post('/cart/add/:id', isLoggedIn, (req,res)=>{
+
+  req.session.userInfo.cart.push({
+    id: req.params.id,
+    quantity: req.body.quantity
+  })
+
+  userModel.updateOne({_id: req.session.userInfo._id }, {cart: req.session.userInfo.cart})
+  .then(() =>{
+    
+    res.redirect('/user/cart')
+  })
+  .catch(err => console.log(err))
+
+})
+
+router.put('/cart/pay', isLoggedIn, (req,res)=>{
+
+  req.session.userInfo.cart.forEach( (item, ind) => {
+
+    productModel.findOne({_id : item.id})
+    .then(product =>{
+      productModel.updateOne({_id: product._id}, {quantity: product.quantity - item.quantity })
+      .then(()=>{
+        
+        if(ind >= req.session.userInfo.cart.length - 1){
+          
+  
+          userModel.updateOne({_id: req.session.userInfo._id}, {cart: []})
+          .then(( )=>{
+              req.session.userInfo.cart = []
+              res.redirect('/')
+          })
+      }
+
+      })
+      .catch(err => console.log(err))
+
+
+    })
+    .catch(err => console.log(err))
+  })
+
 })
 
 module.exports = router;

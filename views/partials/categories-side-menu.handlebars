@@ -2,7 +2,7 @@
    <h3>Categories</h3>
     <ul class="jr mt-2">
       {{#each categories}}
-        <li class="jr mt-1"><a class="link-darkg-bg" href="/products/list/{{this}}" class="jr flex-col between ct-product center">{{capitalizeFirst this}}</a></li>
+        <li class="jr mt-1"><a class="link-darkg-bg" href="/products/list/{{this.name}}" class="jr flex-col between ct-product center">{{capitalizeFirst this.name}}</a></li>
       {{/each}}
     </ul>
 

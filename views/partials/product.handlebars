@@ -4,27 +4,45 @@
   <h4 class="jr mp-0">{{name}}</h4>
   <div class="jr flex-m-row">
 
-    <img class="jr col-m-1" src={{imgSrc}} alt="">
+    <img class="jr col-m-1" src="/uploads/products/{{imgSrc}}" alt="">
     <p class="jr col-m-9 p-2 m-0">{{description}}</p>
   
   </div> 
 
   <div class="jr flex-row between">
     <span><sup>CDN$ </sup>{{toCurrency price}}</span>
-    <button class="jr button-primary m-05">Buy</button>
+    {{#if @root.user}}
+    <form action="/user/cart/add/{{id}}" method="POST" class="">
+      <label for="quantity">Quantity</label>
+      <input type="number" name="quantity" id='quantity' min="1" value='1' style="width: 40px;">
+      <input class="jr button-primary m-05" type="submit" value="Add to Cart">
+    </form>
+    {{else}}
+        <b>Log In To Buy</b>
+    {{/if}}
   </div>
 {{/if}}
 
 {{#if titleAndPrice}}
 <li class="jr flex-m-col between col-m-4 p-1 ct-product card flex-m-grow-1">
   <h4 class="jr mp-0">{{name}}</h4>
-  <img class="jr" src={{imgSrc}} alt="">
+  <img class="jr" src="/uploads/products/{{imgSrc}}" alt="">
   <span>{{price}}</span>
 {{/if}}
 
 {{#if justPicture}}
 <li class="jr flex-m-col between col-m-4 p-1 ct-product card flex-m-grow-1">
-  <img class="jr" src={{imgSrc}} alt="">
+  <img class="jr" src="/uploads/products/{{imgSrc}}" alt="">
+  {{#if @root.user}}
+    <form action="/user/cart/add/{{id}}" method="POST" class="jr flex-row center">
+      {{!-- <label for="quantity">Quantity</label> --}}
+      <input type="number" name="quantity" id='quantity' style="width: 40px;" value="1" hidden>
+      <input class="jr button-primary m-1" type="submit" value="Add to Cart">
+    </form>
+    {{else}}
+        <b>Log In To Buy</b>
+    {{/if}}
+    
 {{/if}}
 
   

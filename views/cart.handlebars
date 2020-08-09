@@ -1,0 +1,88 @@
+<article >
+  <div class="jr flex-m-row center">
+
+    <div class="jr col-m-6 flex-col card">
+      <h2 class="jr ml-1">Shopping Bag</h2>
+
+      <ul>
+      {{#if @root.user.cart }} 
+        {{#each @root.user.cart}}
+          <li class="jr flex-row between col mr-1 ml-1 mt-05 p-0 ct-product flex-m-grow-1 product-list-item">
+                <div class="jr flex-col w100 card p-05">
+                <h4 class="jr mp-0"> {{name}}</h4>
+                <h5 class="jr mp-0"><b>category: </b><span>{{category}}</span></h5>
+                <div class="jr flex-m-row mt-05">
+
+                <img class="jr col-m-15" style="height: 6rem;" src="/uploads/products/{{imgSrc}}" alt="">
+                <p class="jr col-m-8 p-2 m-0" style="font-size: .6rem;">{{description}}</p>
+              
+              <div class="jr flex-col between">
+                <span><b></b><sup>CDN$ </sup>{{toCurrency price}}</span>
+                <span>Quantity: {{quantity}} units</span>
+                <span><b>Sub Total: </b><sup>CDN$ </sup><span class="sub-total">{{toCurrency total}}</span></span>
+
+              </div>  
+              </div> 
+
+            </div>
+          
+
+          </li>
+          
+        {{/each}}
+      {{else}}
+
+       <li class="jr mr-1 mt-05 p-1">Your shopping bag is empty</li>
+      {{/if}}
+
+      <p class="jr mr-1 mt-05 p-1"><b>Total : <sup>CDN$ </sup> <span id="total-to-pay" ></span></p></b>
+
+      </ul>
+    </div>
+
+    <div class="jr col-m-5 flex-col card p-1">
+  <h2>Payment</h2>
+
+      <form action="/user/cart/pay?method=PUT" method="POST" class="jr flex-col p-1">
+      
+      <div class="jr card flex-col p-1 m-1">
+      <h3>Credit Card Info</h3>
+      <label for="cardnumber">Card Number</label>
+      <input type="text" id="cardnumber" value="****************" readonly>
+
+      <label for="carddate">Card Number</label>
+      <input type="text" id="carddate" value="00/00" readonly>
+
+      <label for="securitycode">Security Code</label>
+      <input type="text" id="securitycode" value="000" readonly>
+
+      </div>
+
+      <input type="submit" class="jr button-primary mt-1" value="Pay">
+      </form>
+
+    </div>
+
+
+  </div>
+
+  <script>
+    const $totalToPay = document.querySelector('#total-to-pay')
+    const $subTotals = document.getElementsByClassName('sub-total')
+
+    function calcTotal(){
+
+      let total = 0
+      
+      for (let $subTotal of $subTotals){
+        total += parseFloat($subTotal.textContent)
+      }
+
+      $totalToPay.textContent = total.toFixed(2)
+    }
+
+
+calcTotal()
+
+  </script>
+</article>
