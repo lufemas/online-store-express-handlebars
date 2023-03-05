@@ -12,7 +12,7 @@
     "express-fileupload": "^1.1.10",
     "express-handlebars": "^4.0.4",
     "express-session": "^1.17.1",
-    "mongoose": "^5.9.27"
+    "mongoose": "^5.13.16"
   },
   "scripts": {
     "start": "node index"
